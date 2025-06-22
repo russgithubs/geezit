@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --baby-blue: #87CEEB;
+    --soft-pink: #FFB6C1;
+    --vanilla: #F3E5AB;
+    --dark-text: #2c3e50;
+    --light-text: #7f8c8d;
+    --error: #e74c3c;
+    --success: #27ae60;
+    --shadow: rgba(0, 0, 0, 0.1);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, var(--baby-blue) 0%, var(--soft-pink) 50%, var(--vanilla) 100%);
+    min-height: 100vh;
+    color: var(--dark-text);
+    overflow-x: hidden;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-3xl p-8 shadow-xl mb-5;
+    animation: slideIn 0.4s ease-out;
+  }
+
+  .btn-primary {
+    @apply w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 relative overflow-hidden;
+    background: linear-gradient(45deg, var(--baby-blue), var(--soft-pink));
+  }
+
+  .btn-primary:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply w-full py-4 px-6 rounded-xl font-semibold transition-all duration-300;
+    background: var(--vanilla);
+    color: var(--dark-text);
+  }
+
+  .btn-secondary:hover {
+    @apply transform -translate-y-1;
+    background: #e8d89f;
+  }
+
+  .form-input {
+    @apply w-full p-3 border-2 border-transparent rounded-xl font-medium transition-all duration-300;
+    background: rgba(135, 206, 235, 0.1);
+  }
+
+  .form-input:focus {
+    @apply outline-none bg-white;
+    border-color: var(--baby-blue);
+  }
+
+  .floating-heart {
+    @apply fixed pointer-events-none z-50;
+    animation: floatUp 3s ease-out forwards;
+  }
+
+  .heart-btn {
+    @apply fixed bottom-8 right-8 w-16 h-16 rounded-full border-none text-white text-3xl cursor-pointer shadow-xl transition-all duration-300 flex items-center justify-center z-50;
+    background: var(--soft-pink);
+  }
+
+  .heart-btn:hover {
+    @apply transform scale-110;
+  }
+
+  .heart-btn.liked {
+    background: var(--error);
+    animation: heartBeat 0.8s ease-in-out;
+  }
+
+  .nav-btn {
+    @apply w-14 h-14 rounded-full border-none cursor-pointer shadow-xl transition-all duration-300 flex items-center justify-center text-2xl text-white;
+  }
+
+  .nav-btn:hover {
+    @apply transform -translate-y-1 shadow-2xl;
+  }
+
+  .message-item {
+    @apply p-5 rounded-2xl mb-4 relative;
+    background: linear-gradient(135deg, rgba(135, 206, 235, 0.1), rgba(255, 182, 193, 0.1));
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .alert {
+    @apply fixed top-5 left-1/2 transform -translate-x-1/2 bg-white px-8 py-4 rounded-full shadow-xl flex items-center gap-3 z-50;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .alert.success {
+    background: var(--success);
+    @apply text-white;
+  }
+
+  .alert.error {
+    background: var(--error);
+    @apply text-white;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200px) rotate(360deg) scale(0.2);
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.3); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.2); }
+}
+
+@media (max-width: 480px) {
+  .card {
+    @apply p-5 mx-2;
+  }
+  
+  .heart-btn {
+    @apply bottom-5 right-5 w-12 h-12 text-2xl;
+  }
+}
